@@ -23,7 +23,7 @@ export class User extends AbstractBaseEntity {
   @Column({
     nullable: false,
   })
-  profile_id: string;
+  profile_id: number;
 
   @OneToOne(() => Profile)
   @JoinColumn({

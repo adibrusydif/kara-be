@@ -5,38 +5,43 @@ import { Class } from '../class/class.entity';
 @Entity()
 export class Profile extends AbstractBaseEntity {
     @Column({
-      nullable: false,
+      nullable: true,
     })
     nim: string;
   
     @Column({
-      nullable: false,
+      nullable: true,
     })
     name: string;
   
     @Column({
-      nullable: false,
+      nullable: true,
     })
     phone: string;
   
     @Column({
-      nullable: false,
+      nullable: true,
     })
     address: string;
 
     @Column({
-        nullable: false,
+      nullable: true,
+    })
+    image: string;
+
+    @Column({
+        nullable: true,
       })
     school: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         type: 'timestamp',
       })
     birthdate: Date;
 
     @Column({
-        nullable: false,
+        nullable: true,
       })
     class_id: number;
 
