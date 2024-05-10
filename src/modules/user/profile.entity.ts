@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne , JoinColumn} from 'typeorm';
+import { Column, Entity, ManyToOne , JoinColumn} from 'typeorm';
 import { AbstractBaseEntity } from 'src/typeorm/baseEntity';
 import { Class } from '../class/class.entity';
 
@@ -45,9 +45,10 @@ export class Profile extends AbstractBaseEntity {
       })
     class_id: number;
 
-    @OneToOne(() => Class)
+    @ManyToOne(() => Class, clazz => clazz.profiles)
     @JoinColumn({
       name: "class_id",
     })
     class: Class
+
   }

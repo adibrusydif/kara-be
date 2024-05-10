@@ -7,7 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [JwtModule.register({
     secret: 'secret', // Same secret as used when issuing the token
-    signOptions: { expiresIn: '30d' },
+    signOptions: { expiresIn: '30d'},
   })],
   controllers: [MiddlewareController],
   providers: [MiddlewareService],

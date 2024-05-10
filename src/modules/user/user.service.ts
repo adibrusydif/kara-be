@@ -130,4 +130,29 @@ export class UserService {
     findUsersByEmail(email: string) {
         return this.userRepository.findOne({ where: { email: email } });
     }
+
+    async findListStudent(filter: string) {
+        const students = await this.userRepository.createQueryBuilder('user')
+            .innerJoin('user.profile', 'profile')
+            .select([
+                'user.id',
+                'user.email',
+                'user.role',
+                'profile'
+            ])
+            .where(`role = :role`, { role: filter })
+            .getMany()
+        return {
+            message: 'success',
+            statusCode: 200,
+            data: students,
+        };
+    }
+
+    updateUserClass(ids: any, class_id: any) {
+        const update = this.profilerRepository.createQueryBuilder().update(Profile).set({ class_id: class_id })
+        .where("id IN (:...ids)", { ids: ids })
+        .execute();
+        return update
+    }
 }

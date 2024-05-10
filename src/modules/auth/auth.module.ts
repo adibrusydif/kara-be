@@ -13,7 +13,7 @@ import { UserModule } from '../user/user.module';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         secret: 'secret',
-        signOptions: { expiresIn: '60s' },
+        signOptions: { expiresIn: '30d' },
         global: true,
       }),
       inject: [ConfigService],
