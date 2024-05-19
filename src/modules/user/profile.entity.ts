@@ -18,6 +18,26 @@ export class Profile extends AbstractBaseEntity {
       nullable: true,
     })
     phone: string;
+
+    @Column({
+      nullable: true,
+    })
+    parent_phone: string;
+
+    @Column({
+      nullable: true,
+    })
+    parent_name: string;
+
+    @Column({
+      nullable: true,
+    })
+    gender: string;
+
+    @Column({
+      nullable: true,
+    })
+    height: string;
   
     @Column({
       nullable: true,

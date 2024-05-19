@@ -29,4 +29,9 @@ export class UpdateUserDto {
 
     @IsNotEmpty()
     birthdate: Date;
+
+    parent_phone: string;
+    parent_name: string;
+    gender: string;
+    height: string;
   }

@@ -8,6 +8,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { ClassModule } from './modules/class/class.module';
+import { SubjectModule } from './modules/subject/subject.module';
+import { ScheduleModule } from './modules/class/schedule.module';
 
 
 @Module({
@@ -27,7 +29,9 @@ import { ClassModule } from './modules/class/class.module';
   ),
     UserModule,
     AuthModule,
-    ClassModule
+    ClassModule,
+    SubjectModule,
+    ScheduleModule
   ],
   controllers: [AppController],
   providers: [AppService],

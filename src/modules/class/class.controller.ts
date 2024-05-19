@@ -27,4 +27,9 @@ export class ClassController {
     findStudentClass(@Param('id') id: string) {
         return this.classService.getClassStudents(id);
     }
+
+    @Get('list')
+    getClassList() {
+        return this.classService.getListClass();
+    }
 }

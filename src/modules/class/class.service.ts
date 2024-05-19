@@ -72,4 +72,17 @@ export class ClassService {
             data: students
         }
     }
+
+    async getListClass(){
+        const classes = await this.classRepository.createQueryBuilder('class')
+        .select([
+            'class.id',
+            'class.name'
+        ]).getMany()
+        return {
+            message: 'success',
+            statusCode: 200,
+            data: classes
+        }
+    }
 }

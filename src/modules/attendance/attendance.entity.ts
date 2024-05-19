@@ -21,6 +21,11 @@ export class Attendance extends AbstractBaseEntity {
   })
   time: Date;
 
+  @Column({
+    nullable: true,
+  })
+  verify_by: string;
+
   @ManyToOne(() => Schedule, (s) => s.attendance, {
     cascade: true,
   })

@@ -3,6 +3,7 @@ import { AbstractBaseEntity } from 'src/typeorm/baseEntity';
 import { Attendance } from '../attendance/attendance.entity';
 import { Profile } from '../user/profile.entity';
 import { Class } from './class.entity';
+import { Subject } from '../subject/subject.entity';
 
 @Entity()
 export class Schedule extends AbstractBaseEntity {
@@ -26,7 +27,7 @@ export class Schedule extends AbstractBaseEntity {
   @Column({
     nullable: false,
   })
-  subject: string;
+  subject_id: string;
 
   @Column({
     nullable: false,
@@ -51,7 +52,9 @@ export class Schedule extends AbstractBaseEntity {
   })
   class: Class;
 
-  @OneToOne(() => Profile)
+  @ManyToOne(() => Profile, (p) => p.id, {
+    cascade: true,
+  })
   @JoinColumn({
     name: "teacher_id",
   })
@@ -59,4 +62,12 @@ export class Schedule extends AbstractBaseEntity {
 
   @OneToMany(() => Attendance, (a) => a.schedule_id)
   attendance: Attendance[];
+
+  @ManyToOne(() => Subject, (s) => s.id, {
+    cascade: true,
+  })
+  @JoinColumn({
+    name: 'subject_id',
+  })
+  subject: Subject;
 }
