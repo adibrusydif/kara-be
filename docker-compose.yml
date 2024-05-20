@@ -5,6 +5,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=kara
+      - POSTGRES_USER=postgres
     container_name: db-kara
     volumes:
       - ./pgdata:/var/lib/postgresql/data
