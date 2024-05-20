@@ -8,7 +8,7 @@ services:
       - POSTGRES_USER=postgres
     container_name: db-kara
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
@@ -40,3 +40,6 @@ services:
     environment:
       - NGINX_HOST=159.223.36.142
       - NGINX_PORT=80
+
+volumes:
+  db-data:
