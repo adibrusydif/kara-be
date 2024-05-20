@@ -29,7 +29,7 @@ services:
   nginx:
     image: nginx
     build:
-      context: /nginx
+      context: ./nginx
       dockerfile: Dockerfile
     volumes:
       - ./templates:/etc/nginx/templates
