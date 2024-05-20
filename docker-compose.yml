@@ -4,6 +4,7 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=kara
     container_name: db-kara
     volumes:
       - ./pgdata:/var/lib/postgresql/data
