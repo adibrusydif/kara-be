@@ -25,3 +25,16 @@ services:
       - db
     volumes:
       - ./src:/app/src
+  
+  nginx:
+    image: nginx
+    build:
+      context: /nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./templates:/etc/nginx/templates
+    ports:
+    - "8080:80"
+    environment:
+      - NGINX_HOST=159.223.36.142
+      - NGINX_PORT=80
