@@ -18,7 +18,7 @@ import { ScheduleModule } from './modules/class/schedule.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'db-kara',
+    host: 'db',
     port: 5432,
     username: 'postgres',
     password: 'postgres',
