@@ -22,7 +22,7 @@ import { ScheduleModule } from './modules/class/schedule.module';
     port: 5432,
     username: 'postgres',
     password: 'postgres',
-    database: 'kara',
+    database: 'postgres',
     entities: entities,
     synchronize: false,
     },

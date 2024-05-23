@@ -8,7 +8,7 @@ export default new DataSource({
   port: 5432,
   username: 'postgres',
   password:'postgres',
-  database: 'kara',
+  database: 'postgres',
   entities: entities,
   synchronize: false,
   migrations: ['./src/database/migrations/*.ts'],
