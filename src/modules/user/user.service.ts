@@ -16,7 +16,6 @@ export class UserService {
         private readonly profilerRepository: Repository<Profile>,
     ) { }
     async create(createUserDto: CreateUserDto) {
-
         const profileDefault = {
             nim: null,
             name: null,
@@ -25,50 +24,42 @@ export class UserService {
             school: null,
             birthdate: null,
             class_id: null,
+        };
+
+        try {
+            // Create the profile
+            const profile = this.profilerRepository.create(profileDefault);
+            const savedProfile = await this.profilerRepository.save(profile);
+
+            // Create the user with the hashed password and associated profile
+            const user = this.userRepository.create({
+                ...createUserDto,
+                password: await bcrypt.hash(createUserDto.password, 10),
+                profile: savedProfile,
+            });
+            const savedUser = await this.userRepository.save(user);
+
+            return {
+                message: 'success',
+                statusCode: 200,
+                data: {
+                    id: savedUser.id,
+                },
+            };
+        } catch (error) {
+            console.error('Error creating user:', error);
+            throw new Error('Could not create user');
         }
-
-        const profileCreate = await this.profilerRepository.createQueryBuilder()
-            .insert().into(Profile).values(profileDefault).execute()
-
-        const user = {
-            ...createUserDto,
-            password: await bcrypt.hash(createUserDto.password, 10),
-            profile_id: profileCreate.identifiers[0].id
-        };
-        const userCreate = await this.userRepository.createQueryBuilder()
-            .insert()
-            .into(User)
-            .values(user)
-            .execute()
-        return {
-            message: 'success',
-            statusCode: 200,
-            data: {
-                id: userCreate.identifiers[0].id,
-            }
-        };
     }
 
     async findAll() {
         const users = await this.userRepository.createQueryBuilder('user')
-            .innerJoin('user.profile', 'profile')
+            .innerJoinAndSelect('user.profile', 'profile')
             .select([
                 'user.id',
                 'user.email',
                 'user.role',
-                'profile.id',
-                'profile.createdAt',
-                'profile.updatedAt',
-                'profile.nim',
-                'profile.name',
-                'profile.phone',
-                'profile.parent_phone',
-                'profile.gender',
-                'profile.school',
-                'profile.birthdate',
-                'profile.class_id',
-                'profile.address',
-                'profile.image',
+                'profile'
             ])
             .getMany()
         return {
@@ -86,19 +77,7 @@ export class UserService {
                 'user.id',
                 'user.email',
                 'user.role',
-                'profile.id',
-                'profile.createdAt',
-                'profile.updatedAt',
-                'profile.nim',
-                'profile.name',
-                'profile.phone',
-                'profile.parent_phone',
-                'profile.gender',
-                'profile.school',
-                'profile.birthdate',
-                'profile.class_id',
-                'profile.address',
-                'profile.image',
+                'profile'
             ])
             .getOne()
 
@@ -117,8 +96,8 @@ export class UserService {
             where: {
                 id: id,
             },
+            relations: ['profile']
         });
-
         const existingProfile = await this.profilerRepository.findOne({
             where: {
                 id: existingUser.profile.id,
