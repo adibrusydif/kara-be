@@ -20,11 +20,6 @@ export class User extends AbstractBaseEntity {
   })
   password: string;
 
-  @Column({
-    nullable: false,
-  })
-  profile_id: number;
-
   @OneToOne(() => Profile)
   @JoinColumn({
     name: "profile_id",

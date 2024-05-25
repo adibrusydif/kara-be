@@ -56,7 +56,19 @@ export class UserService {
                 'user.id',
                 'user.email',
                 'user.role',
-                'profile'
+                'profile.id',
+                'profile.createdAt',
+                'profile.updatedAt',
+                'profile.nim',
+                'profile.name',
+                'profile.phone',
+                'profile.parent_phone',
+                'profile.gender',
+                'profile.school',
+                'profile.birthdate',
+                'profile.class_id',
+                'profile.address',
+                'profile.image',
             ])
             .getMany()
         return {
@@ -74,7 +86,19 @@ export class UserService {
                 'user.id',
                 'user.email',
                 'user.role',
-                'profile'
+                'profile.id',
+                'profile.createdAt',
+                'profile.updatedAt',
+                'profile.nim',
+                'profile.name',
+                'profile.phone',
+                'profile.parent_phone',
+                'profile.gender',
+                'profile.school',
+                'profile.birthdate',
+                'profile.class_id',
+                'profile.address',
+                'profile.image',
             ])
             .getOne()
 
@@ -97,7 +121,7 @@ export class UserService {
 
         const existingProfile = await this.profilerRepository.findOne({
             where: {
-                id: existingUser.profile_id,
+                id: existingUser.profile.id,
             },
         });
 
@@ -151,8 +175,8 @@ export class UserService {
 
     updateUserClass(ids: any, class_id: any) {
         const update = this.profilerRepository.createQueryBuilder().update(Profile).set({ class_id: class_id })
-        .where("id IN (:...ids)", { ids: ids })
-        .execute();
+            .where("id IN (:...ids)", { ids: ids })
+            .execute();
         return update
     }
 }
